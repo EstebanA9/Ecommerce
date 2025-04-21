@@ -3,7 +3,7 @@
 @section('title', 'Listado de Categorías')
 
 @section('content')
-<div class="container p-0">
+<div class="container p-0 text-center">
     <h1>Listado de Categorías</h1>
 
     {{-- Botón para crear nueva categoría --}}

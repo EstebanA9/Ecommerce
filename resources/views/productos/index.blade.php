@@ -3,7 +3,7 @@
 @section('title', 'Listado de Productos')
 
 @section('content')
-    <div class="container p-0">
+    <div class="container p-0 text-center">
         <h1>Catálogo</h1>
 
         {{-- Mensaje de éxito --}}
@@ -65,9 +65,8 @@
                     </div>
                 </div>
             @empty
-                <p class="w-100 text-center text-dark-50">No hay productos registrados.</p>
+                <p class="w-100 text-center text-black-50">No hay productos registrados.</p>
             @endforelse
-
         </div>
     </div>
 @endsection
