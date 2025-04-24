@@ -111,8 +111,6 @@ class ProductoController extends Controller
             'imagen_url' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-
-
         $producto = Producto::findOrFail($id);
 
         if ($request->hasFile('imagen_url')) {

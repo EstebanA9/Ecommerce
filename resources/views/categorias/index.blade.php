@@ -10,6 +10,13 @@
     <button class="btn btn-primary my-3">
         <a href="{{ route('categorias.create') }}">Nueva categoría</a>
     </button>
+
+    {{-- Mensaje de éxito --}}
+    @if (session('success'))
+        <div style="color: green; margin-bottom: 10px;">
+            {{ session('success') }}
+        </div>
+    @endif
 </div>
     
 

@@ -32,6 +32,7 @@
                     <li><a class="{{ request()->routeIs('inicio') ? 'active' : '' }}" href="{{ url('/') }}">Inicio</a></li>
                     <li><a class="{{ request()->routeIs('productos.index') ? 'active' : '' }}" href="{{ route('productos.index') }}">Productos</a></li>
                     <li><a class="{{ request()->routeIs('categorias.index') ? 'active' : '' }}" href="{{ route('categorias.index') }}">Categorías</a></li>
+                    <li><a class="{{ request()->routeIs('view-blog') ? 'active' : '' }}" href="{{ route('view-blog') }}">Blog</a></li>
                 </ul>
 
             </div>

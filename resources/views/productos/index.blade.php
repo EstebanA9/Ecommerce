@@ -6,13 +6,6 @@
     <div class="container p-0 text-center">
         <h1>Catálogo</h1>
 
-        {{-- Mensaje de éxito --}}
-        @if (session('success'))
-            <div style="color: green; margin-bottom: 10px;">
-                {{ session('success') }}
-            </div>
-        @endif
-
         {{-- Filtro por categoría --}}
         <form method="GET" action="{{ route('productos.index') }}">
             <label for="categoria">Filtrar por categoría:</label>
@@ -30,6 +23,13 @@
         <button class="btn btn-primary my-3">
             <a href="{{ route('productos.create') }}">Agregar producto</a>
         </button>
+
+        {{-- Mensaje de éxito --}}
+        @if (session('success'))
+            <div style="color: green; margin-bottom: 10px;">
+                {{ session('success') }}
+            </div>
+        @endif
 
     </div>
 
