@@ -20,6 +20,6 @@ class Articulos extends Model
 
     public function comentarios()
     {
-        return $this->hasMany(Comentarios::class);
+        return $this->hasMany(Comentarios::class, 'id_articulo');
     }
 }

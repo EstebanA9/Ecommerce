@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Articulos;
 use App\Models\CategoriasBlog;
+use App\Models\Comentarios;
 use Illuminate\Http\Request;
 
 class ArticulosController extends Controller
@@ -64,7 +65,8 @@ class ArticulosController extends Controller
     public function show($id)
     {
         $articulo = Articulos::findOrFail($id);
-        return view('articulos_blog.show', compact('articulo'));
+        $comentarios = Comentarios::all();
+        return view('articulos_blog.show', compact('articulo','comentarios'));
     }
 
     /**

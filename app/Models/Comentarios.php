@@ -14,4 +14,9 @@ class Comentarios extends Model
         'email',
         'id_articulo',
     ];
+
+    public function articulo()
+{
+    return $this->belongsTo(Articulos::class, 'id_articulo');
+}
 }

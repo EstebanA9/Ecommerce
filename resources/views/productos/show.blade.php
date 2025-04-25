@@ -14,6 +14,5 @@
     <img src="{{ asset('storage/' . $producto->imagen_url) }}" alt="Imagen del producto" width="200">
     @endif
 
-    <br><br>
-    <a href="{{ route('productos.index') }}">← Volver al listado</a>
+    <a class="btn btn-primary" href="{{ route('productos.index') }}">← Volver al listado</a>
 @endsection
