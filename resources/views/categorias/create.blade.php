@@ -3,28 +3,42 @@
 @section('title', 'Crear Categoría')
 
 @section('content')
-    <h1>Crear nueva categoría</h1>
+<div class="d-flex justify-content-center align-items-center">
+    <div class="card text-white bg-dark border-0 rounded-4 w-75">
+        <div class="card-header text-center">
+            <h4 class="mb-0">Crear Categoria</h4>
+        </div>
 
-    @if ($errors->any())
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+        <div class="card-body d-flex justify-content-center">
+            <div class="w-100" style="max-width: 500px;">
+                @if ($errors->any())
+                    <div class="alert alert-danger py-2 px-3 mb-3">
+                        <ul class="mb-0 small">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-    <form action="{{ route('categorias.store') }}" method="POST">
-        @csrf
-
-        <label>Nombre:</label><br>
-        <input type="text" name="nombre" placeholder="Nombre de la categoría" required><br><br>
-
-        <label>Descripción:</label><br>
-        <textarea name="descripcion" placeholder="Descripción de la categoría" required></textarea><br><br>
-
-        <button type="submit">Guardar</button>
-    </form>
-
-    <br>
-    <a href="{{ route('categorias.index') }}">← Volver al listado</a>
+                <form action="{{ route('categorias.store') }}" method="POST">
+                    @csrf
+                    
+                    <div class="mb-3">
+                        <label>Nombre:</label>
+                        <input type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" placeholder="Ej: Electrodomesticos" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Descripción:</label>
+                        <textarea name="descripcion" class="form-control" placeholder="Añade una descripción" required>{{ old('descripcion') }}</textarea>
+                    </div>
+                    <div class="text-end">
+                        <a class="btn btn-secondary" href="{{ route('categorias.index') }}">Cancelar</a>
+                        <button class="btn btn-primary" type="submit">Confirmar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

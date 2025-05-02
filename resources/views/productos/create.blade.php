@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="d-flex justify-content-center align-items-center">
-    <div class="card text-white bg-dark border-0 w-75">
-        <div class="card-header text-center border-bottom border-secondary">
+    <div class="card text-white bg-dark border-0 rounded-4 w-75">
+        <div class="card-header text-center">
             <h4 class="mb-0">Crear nuevo producto</h4>
         </div>
 
@@ -26,28 +26,28 @@
 
                     <div class="mb-3">
                         <label class="form-label small">Nombre</label>
-                        <input type="text" name="nombre" class="form-control form-control-sm bg-dark text-white border-secondary w-100" required>
+                        <input type="text" name="nombre" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label small">Descripción</label>
-                        <textarea name="descripcion" class="form-control form-control-sm bg-dark text-white border-secondary w-100" required></textarea>
+                        <textarea name="descripcion" class="form-control" required></textarea>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col">
                             <label class="form-label small">Precio</label>
-                            <input type="number" name="precio" class="form-control form-control-sm bg-dark text-white border-secondary w-100" step="0.01" required>
+                            <input type="number" name="precio" class="form-control" required>
                         </div>
                         <div class="col">
                             <label class="form-label small">Stock</label>
-                            <input type="number" name="stock" class="form-control form-control-sm bg-dark text-white border-secondary w-100" required>
+                            <input type="number" name="stock" class="form-control" required>
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label small">Categoría</label>
-                        <select name="categoria_id" class="form-select form-select-sm bg-dark text-white border-secondary w-100" required>
+                        <select name="categoria_id" class="form-select" required>
                             <option value="">Seleccionar</option>
                             @foreach($categorias as $categoria)
                                 <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
@@ -57,12 +57,12 @@
 
                     <div class="mb-4">
                         <label for="imagen_url" class="form-label">Imagen:</label>
-                        <input type="file" name="imagen_url" id="imagen_url" class="form-control form-control-sm bg-dark text-white border-secondary w-100" accept="image/*">
+                        <input type="file" name="imagen_url" id="imagen_url" class="form-control" accept="image/*">
                     </div>
 
                     <div class="text-end">
-                        <button type="submit" class="btn btn-sm btn-outline-light">Guardar</button>
-                        <a href="{{ route('productos.index') }}" class="btn btn-sm btn-outline-secondary ms-2">Cancelar</a>
+                        <a href="{{ route('productos.index') }}" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
                     </div>
                 </form>
             </div>

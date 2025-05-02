@@ -7,9 +7,9 @@
     <h1>Listado de Categorías</h1>
 
     {{-- Botón para crear nueva categoría --}}
-    <button class="btn btn-primary my-3">
-        <a href="{{ route('categorias.create') }}">Nueva categoría</a>
-    </button>
+    @auth
+        <a class="btn btn-primary my-3" href="{{ route('categorias.create') }}">Nueva categoría</a>
+    @endauth
 
     {{-- Mensaje de éxito --}}
     @if (session('success'))
@@ -24,22 +24,22 @@
         <div class="row">
             {{-- Lista de categorías --}}
             @foreach($categorias as $categoria)
-            <div class="col-4 d-flex flex-column justify-content-center align-items-center gap-2 border border-2 rounded-3 p-3 my-2">
-            <h2>{{ $categoria->nombre }}</h2>
-            <p><strong>Descripción:</strong> {{ $categoria->descripcion }}</p>
-
-            <div>
-                <button class="btn btn-primary">
-                    <a href="{{ route('categorias.edit', $categoria->id) }}">Editar</a>
-                </button>
-    
-                <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de eliminar esta categoría?')">Eliminar</button>
-                </form>
-
-            </div>
+            <div class="card border-info mb-3 my-2 text-center p-0" style="max-width: 18rem;">
+                <div class="card-header">{{ $categoria->nombre }}</div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Descripción:</strong> {{ $categoria->descripcion }}</p>
+                    <div>
+                        @auth
+                            <a class="btn btn-primary" href="{{ route('categorias.edit', $categoria->id) }}">Editar</a>
+            
+                            <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de eliminar esta categoría?')">Eliminar</button>
+                            </form>
+                        @endauth
+                    </div>
+                </div>
             </div>
             @endforeach  
         </div>

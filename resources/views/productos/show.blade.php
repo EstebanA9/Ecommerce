@@ -3,16 +3,16 @@
 @section('title', 'Detalle del Producto')
 
 @section('content')
-    <h1>{{ $producto->nombre }}</h1>
-
-    <p><strong>Descripción:</strong> {{ $producto->descripcion }}</p>
-    <p><strong>Precio:</strong> ${{ $producto->precio }}</p>
-    <p><strong>Stock:</strong> {{ $producto->stock }}</p>
-    <p><strong>Categoría:</strong> {{ $producto->categoria->nombre ?? 'Sin categoría' }}</p>
-
+<div class="card mb-3 bg-dark text-white rounded-4">
     @if($producto->imagen_url)
-    <img src="{{ asset('storage/' . $producto->imagen_url) }}" alt="Imagen del producto" width="200">
+    <img class="card-img-top" src="{{ asset('storage/' . $producto->imagen_url) }}" alt="Imagen del producto" style="height: 250px; object-fit:cover">
     @endif
-
-    <a class="btn btn-primary" href="{{ route('productos.index') }}">← Volver al listado</a>
+    <div class="card-body">
+        <p><strong>Descripción:</strong> {{ $producto->descripcion }}</p>
+        <p><strong>Precio:</strong> ${{ $producto->precio }}</p>
+        <p><strong>Stock:</strong> {{ $producto->stock }}</p>
+        <p><strong>Categoría:</strong> {{ $producto->categoria->nombre ?? 'Sin categoría' }}</p>
+        <a class="btn btn-primary" href="{{ route('productos.index') }}">Volver</a>
+    </div>
+  </div>
 @endsection

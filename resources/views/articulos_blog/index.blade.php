@@ -5,10 +5,10 @@
         <h1>Articulos</h1>
 
         {{-- Botón para crear --}}
-        <button class="btn btn-primary my-3">
-            <a href="{{ route('articulos_blog.create') }}">Agregar Articulo</a>
-        </button>
-
+        @auth
+            <a class="btn btn-primary my-3" href="{{ route('articulos_blog.create') }}">Agregar Articulo</a>
+        @endauth
+        
         {{-- Mensaje de éxito --}}
         @if (session('success'))
             <div style="color: green; margin-bottom: 10px;">
@@ -27,15 +27,14 @@
                     <p><strong>Descripción:</strong> {{ $articulo->contenido }}</p>
                     <div>
                         <a class="btn btn-primary" href="{{ route('articulos_blog.show', $articulo->id) }}">Ver</a>
-                        
-
-                        <form action="{{ route('articulos_blog.destroy', $articulo->id) }}" method="POST"
-                            style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger" type="submit"
-                                onclick="return confirm('¿Estás seguro de eliminar este articulo?')">Eliminar</button>
-                        </form>
+                        @auth
+                            <form action="{{ route('articulos_blog.destroy', $articulo->id) }}" method="POST"
+                                style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de eliminar este articulo?')">Eliminar</button>
+                            </form>
+                        @endauth
                     </div>
                 </div>
             @endforeach

@@ -3,10 +3,21 @@
 @section('title', 'Inicio')
 
 @section('content')
+
+    @guest
+        @include('auth.login')
+    @endguest
+
+    @auth
     <div class="container">
         <div class="text-center mb-4">
             <h1 class="fw-bold">¡Bienvenido!</h1>
             <p class="lead">Sistema de gestión de productos y categorías.</p>
+            
+            <a class="btn btn-primary" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Cerrar Sesión</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                @csrf
+            </form>
         </div>
 
         <div class="card shadow-sm">
@@ -31,4 +42,5 @@
             </div>
         </div>
     </div>
+    @endauth
 @endsection

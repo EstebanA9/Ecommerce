@@ -9,7 +9,7 @@
         {{-- Filtro por categoría --}}
         <form method="GET" action="{{ route('productos.index') }}">
             <label for="categoria">Filtrar por categoría:</label>
-            <select name="categoria_id" onchange="this.form.submit()">
+            <select class="border border-2 rounded-2" name="categoria_id" onchange="this.form.submit()">
                 <option value="">Todas</option>
                 @foreach ($categorias as $categoria)
                     <option value="{{ $categoria->id }}" {{ request('categoria_id') == $categoria->id ? 'selected' : '' }}>
@@ -20,9 +20,10 @@
         </form>
 
         {{-- Botón para crear --}}
-        <button class="btn btn-primary my-3">
-            <a href="{{ route('productos.create') }}">Agregar producto</a>
-        </button>
+         
+        @auth
+            <a class="btn btn-primary my-3" href="{{ route('productos.create') }}">Agregar producto</a>
+        @endauth
 
         {{-- Mensaje de éxito --}}
         @if (session('success'))
@@ -38,30 +39,32 @@
     <div class="container p-0 col-12 ">
         <div class="row">
             @forelse($productos as $producto)
-                <div
-                    class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex flex-column align-items-center border border-2 rounded-3 p-3 my-2">
-                    <h2 class="text-center fs-3">{{ $producto->nombre }}</h2>
-                    <p><strong>Precio:</strong> ${{ $producto->precio }}</p>
-                    <p><strong>Stock:</strong> {{ $producto->stock }}</p>
-                    <p><strong>Categoría:</strong> {{ $producto->categoria->nombre ?? 'Sin categoría' }}</p>
-                    @if ($producto->imagen_url)
-                        <img src="{{ asset('storage/' . $producto->imagen_url) }}" alt="{{ $producto->nombre }}"
-                            width="200">
-                    @endif
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex flex-column align-items-center rounded-3 my-2">
+                    <div class="card shadow-sm" style="width: 18rem;">
+                        @if ($producto->imagen_url)
+                            <img class="card-img-top" src="{{ asset('storage/' . $producto->imagen_url) }}"
+                                alt="{{ $producto->nombre }}" width="200">
+                        @endif
+                        <div class="card-body text-center">
+                            <h2 class="fs-3">{{ $producto->nombre }}</h2>
+                            <p><strong>Precio:</strong> ${{ $producto->precio }}</p>
+                            <p><strong>Stock:</strong> {{ $producto->stock }}</p>
+                            <p><strong>Categoría:</strong> {{ $producto->categoria->nombre ?? 'Sin categoría' }}</p>
+                            <div>
+                                <a class="btn btn-primary" href="{{ route('productos.show', $producto->id) }}">Ver</a>
+                                @auth
+                                    <a class="btn btn-primary" href="{{ route('productos.edit', $producto->id) }}">Editar</a>
 
-                    <div>
-                        <button class="btn btn-primary"><a
-                                href="{{ route('productos.show', $producto->id) }}">Ver</a></button>
-                        <button class="btn btn-primary"><a
-                                href="{{ route('productos.edit', $producto->id) }}">Editar</a></button>
-
-                        <form action="{{ route('productos.destroy', $producto->id) }}" method="POST"
-                            style="display:inline-block"
-                            onsubmit="return confirm('¿Estás seguro de eliminar este producto?')" class="mt-3">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i></button>
-                        </form>
+                                    <form action="{{ route('productos.destroy', $producto->id) }}" method="POST"
+                                        style="display:inline-block"
+                                        onsubmit="return confirm('¿Estás seguro de eliminar este producto?')" class="mt-3">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i></button>
+                                    </form>
+                                @endauth
+                            </div>
+                        </div>
                     </div>
                 </div>
             @empty

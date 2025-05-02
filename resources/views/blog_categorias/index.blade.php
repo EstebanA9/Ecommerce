@@ -5,9 +5,9 @@
         <h1>Categorías del Blog</h1>
 
         {{-- Botón para crear nueva categoría --}}
-        <button class="btn btn-primary my-3">
-            <a href="{{ route('categorias_blog.create') }}">Nueva categoría</a>
-        </button>
+        @auth
+            <a class="btn btn-primary my-3" href="{{ route('categorias_blog.create') }}">Nueva categoría</a>
+        @endauth
 
         {{-- Mensaje de éxito --}}
         @if (session('success'))
@@ -25,17 +25,17 @@
                     <h2>{{ $categoria->nombre }}</h2>
                     <p><strong>Descripción:</strong> {{ $categoria->descripcion }}</p>
                     <div>
-                        <button class="btn btn-primary">
-                            <a href="{{ route('categorias_blog.edit', $categoria->id) }}">Editar</a>
-                        </button>
+                        @auth
+                            <a class="btn btn-primary" href="{{ route('categorias_blog.edit', $categoria->id) }}">Editar</a>
 
-                        <form action="{{ route('categorias_blog.destroy', $categoria->id) }}" method="POST"
-                            style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger" type="submit"
+                            <form action="{{ route('categorias_blog.destroy', $categoria->id) }}" method="POST"
+                                style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit"
                                 onclick="return confirm('¿Estás seguro de eliminar esta categoría?')">Eliminar</button>
-                        </form>
+                            </form>
+                        @endauth
                     </div>
                 </div>
             @endforeach

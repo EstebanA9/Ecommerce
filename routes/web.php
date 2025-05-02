@@ -24,3 +24,4 @@ Route::resource('categorias_blog', CategoriasBlogController::class);
 Route::resource('articulos_blog', ArticulosController::class);
 Route::view('/viewBlog', 'viewBlog')->name('view-blog');
 Route::resource('articulos_blog.comentarios', ComentariosController::class);
+Auth::routes();
